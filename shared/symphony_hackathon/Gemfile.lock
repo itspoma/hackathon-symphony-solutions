@@ -37,6 +37,7 @@ GEM
     coffee-script-source (1.7.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    geocoder (1.1.9)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -49,11 +50,17 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.4)
     mime-types (1.25.1)
     minitest (4.7.5)
+    mocha (1.0.0)
+      metaclass (~> 0.0.1)
     multi_json (1.9.2)
     mysql2 (0.3.15)
+    nifty-generators (0.4.6)
     polyglot (0.3.4)
+    protected_attributes (1.0.7)
+      activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -111,9 +118,13 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  geocoder
   jbuilder (~> 1.2)
   jquery-rails
+  mocha
   mysql2
+  nifty-generators
+  protected_attributes
   rails (= 4.0.4)
   sass-rails (~> 4.0.2)
   sdoc
