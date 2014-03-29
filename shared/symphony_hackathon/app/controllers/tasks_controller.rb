@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params[:search].present?
-      respond_with Location.near(params[:search], 50)
+      respond_with Task.near(params[:search], 50)
     else
       respond_with Task.all
     end
