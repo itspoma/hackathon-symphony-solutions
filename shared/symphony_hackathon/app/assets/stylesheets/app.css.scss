@@ -23,6 +23,7 @@ html, body {
 #panel {
     @include clearfix;
 
+    font: 13px verdana;
     color: white;
     background-color: #000;
     opacity: 0.7;
@@ -32,48 +33,128 @@ html, body {
     z-index: 1;
     right: 0px;
     top: 40px;
+}
 
-    // &:hover {
-    //     opacity: 0.8;
-    // }
+#results-counts {
+    @include clearfix;
+    margin: 10px;
+    margin-bottom: 20px;
+
+    span {
+        background-color: #312F2F;
+        padding: 2px 3px;
+        border-radius: 2px;
+    }
 }
 
 #filter-tags {
     @include clearfix;
-    background: #FF0;
     margin: 10px;
-    // height: 50px;
+    margin-bottom: 20px;
 
     .item {
-        background-color: red;
+        @include user-select(none);
+        background-color: #2B2B2B;
         float: left;
         margin-right: 5px;
         margin-bottom: 5px;
         padding: 4px 7px;
         font: 13px verdana;
+        border-radius: 2px;
+        cursor: pointer;
+
+        @include transition(background-color, 0.2s, ease);
+
+        &:hover {
+            background-color: #4B4B4B;
+        }
+
+        &:active,
+        &.selected {
+            background-color: #7C7C7C;
+        }
+
+        .title {
+            //
+        }
+
+        .count {
+            background-color: #000;
+            padding: 2px 6px;
+            font: 9px verdana;
+            border-radius: 3px;
+        }
+    }
+}
+
+#results-title {
+    @include clearfix;
+    margin: 10px;
+
+    span {
+        background-color: #312F2F;
+        padding: 2px 3px;
+        border-radius: 2px;
     }
 }
 
 #results {
     @include clearfix;
-    background: blue;
+    // background: blue;
     clear: both;
     margin: 10px;
     height: 500px;
     overflow-x: scroll;
 
+    .preloader {
+        background: url('/preloader-spin.gif');
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        margin-top: 61px;
+    }
+
     .item {
-        background-color: red;
+        background-color: #2B2B2B;
         float: left;
-        width: 180px;
+        width: 170px;
         height: 95px;
         margin-right: 5px;
         margin-bottom: 5px;
+        cursor: pointer;
+        border-radius: 2px;
+        padding: 5px;
+
+        @include transition(background-color, 0.2s, ease);
+
+        &:hover {
+            background-color: #4B4B4B;
+        }
+
+        &:active,
+        &.selected {
+            background-color: #7C7C7C;
+        }
+
+        .img {
+            float: left;
+            background: #F00;
+            width: 35px;
+            height: 35px;
+        }
     }
 }
 
 #map {
     width: 100%;
     height: 100%;
-    background-color: orange;
+    background-color: white;
+
+    .preloader {
+        background: url('/preloader-flag_ua.gif');
+        width: 170px;
+        height: 170px;
+        margin-top: 190px;
+        margin-left: 30%;
+    }
 }
