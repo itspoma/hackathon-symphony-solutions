@@ -1,0 +1,6 @@
+[submodule "vagrant/cookbooks/mc"]
+	path = vagrant/cookbooks/mc
+	url = https://github.com/styx/chef-mc
+[submodule "vagrant/cookbooks/apt"]
+	path = vagrant/cookbooks/apt
+	url = http://github.com/opscode-cookbooks/apt
