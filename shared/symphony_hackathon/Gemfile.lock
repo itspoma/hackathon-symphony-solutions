@@ -102,6 +102,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  execjs
   geocoder
   jbuilder (~> 1.2)
   jquery-rails

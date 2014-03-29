@@ -4,3 +4,6 @@
 [submodule "vagrant/cookbooks/apt"]
 	path = vagrant/cookbooks/apt
 	url = http://github.com/opscode-cookbooks/apt
+[submodule "vagrant/cookbooks/curl"]
+	path = vagrant/cookbooks/curl
+	url = https://github.com/retr0h/cookbook-curl

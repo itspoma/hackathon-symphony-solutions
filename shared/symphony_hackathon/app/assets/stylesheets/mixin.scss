@@ -1,0 +1,52 @@
+@mixin clearfix {
+    zoom: 1;
+    clear: both;
+
+    &:before, &:after {
+        content: "\0020"; 
+        display: block; 
+        height: 0; 
+        overflow: hidden; 
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin user-select($val) {
+  user-select: #{$val};
+  -webkit-touch-callout: #{$val};
+  -webkit-user-select: #{$val};
+  -khtml-user-select: #{$val};
+  -moz-user-select: #{$val};
+  -ms-user-select: #{$val};
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity/100;
+  filter: alpha(opacity=$opacity);
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($inset) {
+     -webkit-box-shadow: $inset;
+      -ms-border-radius: $inset;
+       -o-border-radius: $inset;
+        -moz-box-shadow: $inset;
+             box-shadow: $inset;
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+       -moz-transition: $transition-property $transition-time $method;
+        -ms-transition: $transition-property $transition-time $method;
+         -o-transition: $transition-property $transition-time $method;
+            transition: $transition-property $transition-time $method;
+}
