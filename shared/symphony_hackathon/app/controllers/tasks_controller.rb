@@ -2,8 +2,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   respond_to :json
 
-  # GET /tasks
-  # GET /tasks.json
   def index
     if params[:search].present?
       respond_with Task.includes(:user).near(params[:search], 50)
@@ -13,39 +11,21 @@ class TasksController < ApplicationController
 
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        respond_with @task 
-      else
-        respond_with @task.errors
-      end
-    end
+    @task = Task.create(task_params)
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        respond_with @task
-      else
-        respond_with @task.errors
-      end
+    if @task.update(task_params)
+      respond_with @task
+    else
+      respond_with @task.errors
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     respond_with @task.destroy
   end

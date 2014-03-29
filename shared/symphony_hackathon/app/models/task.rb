@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
 
-  attr_accessible :address, :ltd, :lng, :description, :title, :actual_to, :actual_from, :user, :user_id
+  attr_accessible :address, :ltd, :lng, :description, :title, :actual_to, :actual_from, :user
   # geocoded_by :address, :latitude  => :ltd_eq, :longitude => :lng_eq
   # after_validation :geocode, :if => :address_changed?
 
@@ -10,6 +10,7 @@ class Task < ActiveRecord::Base
 
   def user=(attributes)
     self.user_id = User.create_with(attributes).find_or_create_by(phone: attributes[:phone]).id
+    self.save
   end
 
 end
