@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  ltd: 1.5
+  lng: 1.5
+  actual_to: 2014-03-29
+
+two:
+  title: MyString
+  description: MyText
+  ltd: 1.5
+  lng: 1.5
+  actual_to: 2014-03-29
