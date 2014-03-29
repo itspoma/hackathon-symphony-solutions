@@ -6,9 +6,9 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     if params[:search].present?
-      respond_with Location.near(params[:search], 50)
+      respond_with Task.includes(:user).near(params[:search], 50)
     else
-      respond_with Task.all
+      respond_with Task.includes(:user).all
     end
 
   end
@@ -53,11 +53,11 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      respond_with Task.find(params[:id])
+      respond_with Task.includes(:user).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:point).permit(:title, :description, :ltd, :lng, :actual_to, :actual_from, :user_attributes)
+      params.require(:point).permit(:title, :description, :ltd, :lng, :actual_to, :actual_from, :user)
     end
 end
