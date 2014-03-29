@@ -4,4 +4,9 @@ class Task < ActiveRecord::Base
   geocoded_by :address, :latitude  => :ltd_eq, :longitude => :lng_eq
   #after_validation :geocode, :if => :address_changed?
 
+  acts_as_taggable
+
+  belongs_to :user
+  accepts_nested_attributes_for :user
+
 end
