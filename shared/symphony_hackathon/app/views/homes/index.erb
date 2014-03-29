@@ -11,33 +11,86 @@
 
         <script type="text/javascript">var app = {};</script>
         <script type="text/javascript" src="/app.js"></script>
+
+        <link href='http://fonts.googleapis.com/css?family=Poiret+One|PT+Sans+Narrow|Ubuntu|Open+Sans|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     </head>
   
     <body onload="app.init()">
         <div id="header">
             <!-- <img src="http://lifestyleng.com.ua/img/LifeStyle_logo.png" /> -->
             header
+            //
+            <button id="add_point">add new point</button>
         </div>
         <div id="panel">
-            <div id="results-counts">
-                Знайдено <span><%= rand(50) %></span> записів, <span><%= rand(50) %></span> категорій, <span><%= rand(50) %></span> тегів
+            <div id="panel_search">
+                <h1>Пошук</h1>
+
+                <div id="results-counts">
+                    Знайдено <span><%= rand(50) %></span> записів, <span><%= rand(50) %></span> категорій, <span><%= rand(50) %></span> тегів
+                </div>
+
+                <div id="filter-tags">
+                    <% ['ігри','автомобілі','дороги','програмісти','їда','тьолки','музика','політики','аварія','коти','тварини','пограбування','злочин','дтп'].each do |item| %>
+                        <div class="item">
+                            <span class="title"><%= item %></span>
+                            <span class="count"><%= rand(50) %></span>
+                        </div>
+                    <% end %>
+                </div>
+
+                <div id="results-title">
+                    Найближчі результати <span><%= rand(50) %></span>:
+                </div>
+
+                <div id="results">
+                    <div class="preloader"></div>
+                </div>
             </div>
 
-            <div id="filter-tags">
-                <% ['ігри','автомобілі','дороги','програмісти','їда','тьолки','музика','політики','аварія','коти','тварини','пограбування','злочин','дтп'].each do |item| %>
-                    <div class="item">
-                        <span class="title"><%= item %></span>
-                        <span class="count"><%= rand(50) %></span>
+            <div id="panel_add_point">
+                <h1>Додати новий запис</h1>
+
+                <div class="field address">
+                    <div class="key">Адреса:</div>
+                    <div class="value">
+                        &hellip;
                     </div>
-                <% end %>
-            </div>
 
-            <div id="results-title">
-                Найближчі результати <span><%= rand(50) %></span>:
-            </div>
+                    <input type="hidden" name="lat" value="" />
+                    <input type="hidden" name="lng" value="" />
+                </div>
 
-            <div id="results">
-                <div class="preloader"></div>
+                <div class="field">
+                    <div class="key">Заголовок:</div>
+                    <div class="value">
+                        <input type="text" name="title" placeholder="шось там бла бла" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="key">Опис:</div>
+                    <div class="value">
+                        <textarea name="desctiption" placeholder="шось там бла бла"></textarea>
+                    </div>
+                </div>
+
+                <div class="field tags">
+                    <div class="key">Теги:</div>
+                    <div class="value">
+                        <input type="text" placeholder="шось там бла бла" />
+                        <div class="list">
+                            <div class="item">test1<span>x</span></div>
+                            <div class="item">test2<span>x</span></div>
+                            <div class="item">test3<span>x</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <span id="add_cancel" class="button">Назад</span>
+                    <span id="add_submit" class="button">Зберегти</span>
+                </div>
             </div>
         </div>
         <div id="map">
