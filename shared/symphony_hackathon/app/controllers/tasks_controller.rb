@@ -42,7 +42,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    respond_with { success: @task.destroy } 
+    respond_with @task.destroy
   end
 
   private
