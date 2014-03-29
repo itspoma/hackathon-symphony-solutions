@@ -5,20 +5,17 @@ gem 'rails', '4.0.4'
 gem 'mysql2'
 gem 'geocoder'
 gem 'protected_attributes'
-
 gem 'sass-rails', '~> 4.0.2'
-
 gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'jquery-rails'
+gem 'jbuilder', '~> 1.2'
 
 group :development do 
   gem 'better_errors'
   gem 'binding_of_caller'
 end
 
-gem 'jquery-rails'
 
-gem 'jbuilder', '~> 1.2'
 
