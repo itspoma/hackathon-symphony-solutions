@@ -15,10 +15,10 @@ gem 'rspec-rails'
 gem 'factory_girl_rails', '~> 4.0'
 gem 'acts-as-taggable-on'
 
-#group :development do
-#  gem 'better_errors'
-#  gem 'binding_of_caller'
-#end
+group :development do
+ gem 'better_errors'
+ gem 'binding_of_caller'
+end
 
 
 

@@ -33,7 +33,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      respond_with Task.includes(:user).find(params[:id])
+      @task = Task.includes(:user).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
