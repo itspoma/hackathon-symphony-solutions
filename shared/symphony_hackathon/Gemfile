@@ -11,6 +11,7 @@ gem 'execjs'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
+gem 'acts-as-taggable-on'
 
 group :development do 
   gem 'better_errors'
