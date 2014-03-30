@@ -5,10 +5,10 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    if params[:search].present?
-      respond_with Task.near(params[:search], 50)
+    if params[:point].present?
+      @tasks = Task.within(50, origin: [params[:point][:ltd].to_f, params[:point][:lng].to_f])
     else
-      respond_with Task.all
+      @tasks =  Task.all
     end
 
   end

@@ -1,8 +1,12 @@
 class Task < ActiveRecord::Base
 
   attr_accessible :address, :ltd, :lng, :description, :title, :actual_to
-  geocoded_by :address, :latitude  => :ltd_eq, :longitude => :lng_eq
-  #after_validation :geocode, :if => :address_changed?
+
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :ltd,
+                   :lng_column_name => :lng
 
   acts_as_taggable
 
