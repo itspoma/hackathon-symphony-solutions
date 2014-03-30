@@ -11,6 +11,7 @@ class Task < ActiveRecord::Base
   acts_as_taggable
 
   belongs_to :user
+  belongs_to :category
 
   def user=(attributes)
     self.user_id = User.create_with(attributes).find_or_create_by(phone: attributes[:phone]).id

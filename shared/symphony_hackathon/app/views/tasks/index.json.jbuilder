@@ -8,6 +8,7 @@ json.array!(@tasks) do |task|
   json.actual_from task.actual_from
   json.created_at  task.created_at
   json.updated_at  task.updated_at
+  json.category    task.category
   if task.user
     json.user do
       json.full_name   task.user.full_name
