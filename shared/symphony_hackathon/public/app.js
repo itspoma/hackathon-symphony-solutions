@@ -79,6 +79,107 @@ var app = {
 
             app.update();
         });
+
+        //
+        $('#add_point').on('click', function () {
+            $('#panel_search').fadeOut('fast');
+            $('#panel_add_point').fadeIn('fast');
+
+            if (!app.drag_marker) {
+                app.drag_marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(app.map.getCenter().lat(), app.map.getCenter().lng()),
+                    map: app.map,
+                    animation: google.maps.Animation.DROP,
+                    icon: 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png',
+                    draggable: true
+                });
+            }
+
+            var onMarkerDragEnd = function () {
+                var geocoder = new google.maps.Geocoder;
+
+                var lat = app.drag_marker.getPosition().lat()
+                  , lng = app.drag_marker.getPosition().lng();
+
+                geocoder.geocode({
+                    latLng: new google.maps.LatLng(lat, lng)
+                }, function (data, status) {
+                    $('#panel_add_point .field.address .value').html(data[0].formatted_address);
+                });
+
+                $('#panel_add_point input[name="lat"]').val(lat);
+                $('#panel_add_point input[name="lng"]').val(lng);
+            };
+
+            google.maps.event.addListener(app.drag_marker, 'dragend', onMarkerDragEnd);
+            onMarkerDragEnd();
+        });
+
+        //
+        $('#add_cancel').on('click', function () {
+            $('#panel_add_point').fadeOut('fast');
+            $('#panel_search').fadeIn('fast');
+        });
+
+        //
+        $('#add_submit').on('click', function () {
+            // $('#panel_add_point').fadeOut('fast');
+            // $('#panel_search').fadeIn('fast');
+
+            var invalidField = function (el) {
+                $(el).focus();
+                setTimeout(function() {  $(el).addClass('error');  },0);
+                setTimeout(function() {  $(el).removeClass('error');  },100);
+                setTimeout(function() {  $(el).addClass('error');  },200);
+                setTimeout(function() {  $(el).removeClass('error');  },300);
+                setTimeout(function() {  $(el).addClass('error');  },350);
+                setTimeout(function() {  $(el).removeClass('error');  },400);
+            };
+
+            var titleEl = $('#panel_add_point input[name="title"]')
+              , title = titleEl.val();
+
+            var desctiptionEl = $('#panel_add_point textarea[name="desctiption"]')
+              , desctiption = desctiptionEl.val();
+
+            if (title.length <= 5) {
+                return invalidField(titleEl);
+            }
+
+            if (desctiption.length <= 10) {
+                return invalidField(desctiptionEl);
+            }
+
+            var lat = $('#panel_add_point [name="lat"]').val()
+              , lng = $('#panel_add_point [name="lng"]').val();
+
+            $.ajax({
+                method: 'POST',
+                data: JSON.stringify({
+                    'format': 'json',
+                    'point': {
+                        'desctiption': desctiption,
+                        'title': title,
+                        'lng': lng,
+                        'lat': lat,
+                        'actual_to': '',
+                        'actual_from': '',
+                        'tags': 'aa, bbb',
+                        'user': {
+                            'full_name': '',
+                            'phone': '',
+                            'email': ''
+                        }
+                    }
+                }),
+                url: '/api/v1/points',
+                success: function (data) {
+                    console.log(11, data)
+                }
+            })
+
+            console.log(lat, lng)
+        });
     },
 
     update: function () {

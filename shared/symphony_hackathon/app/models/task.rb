@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
 
-  attr_accessible :address, :ltd, :lng, :description, :title, :actual_to
+  attr_accessible :ltd, :lng, :description, :title, :actual_to, :actual_from, :user
 
   acts_as_mappable :default_units => :miles,
                    :default_formula => :sphere,
@@ -11,6 +11,10 @@ class Task < ActiveRecord::Base
   acts_as_taggable
 
   belongs_to :user
-  accepts_nested_attributes_for :user
+
+  def user=(attributes)
+    self.user_id = User.create_with(attributes).find_or_create_by(phone: attributes[:phone]).id
+    self.save
+  end
 
 end

@@ -9,7 +9,7 @@ json.array!(@tasks) do |task|
   json.created_at  task.created_at
   json.updated_at  task.updated_at
   if task.user
-    json.user_attributes do
+    json.user do
       json.full_name   task.user.full_name
       json.email       task.user.email
       json.phone       task.user.phone
