@@ -50,11 +50,10 @@ html, body {
 
     #panel_search {
         //
-        display: none;
     }
 
     #panel_add_point {
-        // display: none;
+        display: none;
 
         .field {
             @include clearfix;

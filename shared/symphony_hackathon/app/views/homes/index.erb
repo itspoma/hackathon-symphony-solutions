@@ -30,14 +30,7 @@
                     Знайдено <span><%= rand(50) %></span> записів, <span><%= rand(50) %></span> категорій, <span><%= rand(50) %></span> тегів
                 </div>
 
-                <div id="filter-tags">
-                    <% ['ігри','автомобілі','дороги','програмісти','їда','тьолки','музика','політики','аварія','коти','тварини','пограбування','злочин','дтп'].each do |item| %>
-                        <div class="item">
-                            <span class="title"><%= item %></span>
-                            <span class="count"><%= rand(50) %></span>
-                        </div>
-                    <% end %>
-                </div>
+                <div id="filter-tags"></div>
 
                 <div id="results-title">
                     Найближчі результати <span><%= rand(50) %></span>:
@@ -61,16 +54,10 @@
                     <input type="hidden" name="lng" value="" />
                 </div>
 
-                <div class="field">
+                <div class="field categories">
                     <div class="key">Категорія:</div>
                     <div class="value">
-                        <select>
-                            <option value="">- не вибрано -</option>
-                            <option>Автомобілі</option>
-                            <option>22</option>
-                            <option>333333</option>
-                            <option>44444444</option>
-                        </select>
+                        <select name="category_id"></select>
                     </div>
                 </div>
 
@@ -120,6 +107,13 @@
         <div class="item">
             <span class="name">{{=it.name}}</span>
             <span class="close" onclick="app.tags.remove(this)">x</span>
+        </div>
+    </script>
+
+    <script id="tpl-filter-tag-item" type="text/x-dot-template">
+        <div class="item">
+            <span class="title">{{=it.title}}</span>
+            <span class="count">{{=it.count}}</span>
         </div>
     </script>
 
