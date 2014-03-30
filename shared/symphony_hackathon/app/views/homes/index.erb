@@ -65,7 +65,8 @@
                     <div class="key">Категорія:</div>
                     <div class="value">
                         <select>
-                            <option>111</option>
+                            <option value="">- не вибрано -</option>
+                            <option>Автомобілі</option>
                             <option>22</option>
                             <option>333333</option>
                             <option>44444444</option>
@@ -117,7 +118,7 @@
 
     <script id="tpl-tag-item" type="text/x-dot-template">
         <div class="item">
-            <span>{{=escape(it.name)}}</span>
+            <span class="name">{{=it.name}}</span>
             <span class="close" onclick="app.tags.remove(this)">x</span>
         </div>
     </script>
