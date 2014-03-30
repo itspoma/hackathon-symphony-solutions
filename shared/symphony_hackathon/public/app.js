@@ -19,8 +19,6 @@ var app = {
 
         app.update();
 
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-
         for (var i=0; i<=10; i++) {
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(49.8416016+i*0.001, 24.0148105+i*0.01),
@@ -153,6 +151,11 @@ var app = {
             var lat = $('#panel_add_point [name="lat"]').val()
               , lng = $('#panel_add_point [name="lng"]').val();
 
+            var tags = [];
+            $('#panel_add_point .field.tags .value .list .item').filter(function () {
+                tags.push($(this).find('.name').text());
+            });
+
             $.post('/api/v1/points', {
                 'format': 'json',
                 'point': {
@@ -162,7 +165,7 @@ var app = {
                     'lat': lat,
                     'actual_to': '',
                     'actual_from': '',
-                    'tags': 'aa, bbb',
+                    'tags': tags.join(', '),
                     'user': {
                         'full_name': '',
                         'phone': '',
