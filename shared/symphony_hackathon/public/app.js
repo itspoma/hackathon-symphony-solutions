@@ -9,7 +9,11 @@ var markers = {
     'theft': 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-c03638/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/theft.png',
     'fire': 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-c03638/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/fire.png',
     'car-accident': 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-c03638/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/caraccident.png',
-    'shooting': 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-c03638/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/shooting.png'
+    'shooting': 'http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-c03638/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/shooting.png',
+
+    'dogs': '/marker-dogs.png',
+    'sport': '/marker-sport.png',
+    'food': '/marker-food.png'
 };
 
 var app = {
@@ -18,27 +22,6 @@ var app = {
         app.bindEvents();
 
         app.update();
-
-        for (var i=0; i<=10; i++) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(49.8416016+i*0.001, 24.0148105+i*0.01),
-                map: app.map,
-                title: 'test',
-                animation: google.maps.Animation.DROP,
-                icon: markers['fire']
-            });
-
-            google.maps.event.addListener(marker, 'click', function (marker, i) {
-                // infowindow.setContent(locations[i][0]);
-                // infowindow.open(map, marker);
-                alert(1);
-                // var infowindow = new google.maps.InfoWindow({
-                //     content: 'Hello, World!!'
-                // });
-                // infowindow.open(app.map, marker);
-            });
-
-        }
     },
 
     initMap: function () {
@@ -175,7 +158,7 @@ var app = {
                     'desctiption': desctiption,
                     'title': title,
                     'lng': lng,
-                    'lat': lat,
+                    'ltd': lat,
                     'category_id': category_id,
                     'actual_to': '',
                     'actual_from': '',
@@ -229,19 +212,37 @@ var app = {
             }
         })
 
-        //
-        setTimeout(function (){
-            $('#results .preloader').hide();
+        $.ajax({
+            url: '/api/v1/points.json',
+            dateType: 'json',
+            success: function (data) {
+                $('#results .preloader').hide();
 
-            var count = _.random(0,20);
+                $('#results-title span').text(data.length);
+                $('#results-counts span').text(data.length);
 
-            $('#results-title span').text(count);
-            $('#results-counts span').text(count);
+                _.each(data, function (item) {
+                    $('#results').append(tpl('tpl-result-item')({
+                        'item': item
+                    }));
 
-            for (var i=0; i<=count; i++) {
-                $('#results').append(tpl('tpl-result-item')());
+                    if (item.lng && item.lat) {
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(item.lat, item.lng),
+                            map: app.map,
+                            title: item.desctiption,
+                            animation: google.maps.Animation.DROP,
+                            icon: markers[item.category_key]
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function (marker, i) {
+                            alert(1);
+                        });
+                    }
+
+                });
             }
-        }, 2000);
+        })
     },
 
     tags: {

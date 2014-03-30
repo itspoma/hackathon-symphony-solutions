@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
   # bundle install
   # sudo apt-get install -y mysql-server mysql-client
   # sudo apt-get install -y mysql-client-core-5.5
+  # sudo apt-get install -y git nodejs
   # sudo aptitude purge mysql-server
   # sudo aptitude install mysql-server
   # rake db:create
