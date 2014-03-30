@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
 
-  attr_accessible :ltd, :lng, :description, :title, :actual_to, :actual_from, :user
+  attr_accessible :ltd, :lng, :description, :title, :actual_to, :actual_from, :user, :category_id
 
   acts_as_mappable :default_units => :miles,
                    :default_formula => :sphere,

@@ -2,7 +2,7 @@ json.array!(@tasks) do |task|
   json.id           task.id
   json.title        task.title
   json.description  task.description
-  json.ltd          task.ltd
+  json.lat          task.ltd
   json.lng          task.lng
   json.actual_to    task.actual_to
   json.actual_from  task.actual_from

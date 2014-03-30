@@ -20,6 +20,7 @@ describe TasksController do
         ltd: 123.23,
         actual_to: (Time.now + 1.day),
         actual_from: Time.now,
+        category_id: 2,
         tags: 'firts_tag, second_tag, etc',
         user: {
           full_name: 'Andrew Yasinishyn',
@@ -29,6 +30,7 @@ describe TasksController do
       }
     }
     post :create, params
+    puts Task.all.inspect
   end
 
 end
