@@ -153,33 +153,43 @@ var app = {
             var lat = $('#panel_add_point [name="lat"]').val()
               , lng = $('#panel_add_point [name="lng"]').val();
 
-            $.ajax({
-                method: 'POST',
-                data: JSON.stringify({
-                    'format': 'json',
-                    'point': {
-                        'desctiption': desctiption,
-                        'title': title,
-                        'lng': lng,
-                        'lat': lat,
-                        'actual_to': '',
-                        'actual_from': '',
-                        'tags': 'aa, bbb',
-                        'user': {
-                            'full_name': '',
-                            'phone': '',
-                            'email': ''
-                        }
+            $.post('/api/v1/points', {
+                'format': 'json',
+                'point': {
+                    'desctiption': desctiption,
+                    'title': title,
+                    'lng': lng,
+                    'lat': lat,
+                    'actual_to': '',
+                    'actual_from': '',
+                    'tags': 'aa, bbb',
+                    'user': {
+                        'full_name': '',
+                        'phone': '',
+                        'email': ''
                     }
-                }),
-                url: '/api/v1/points',
-                success: function (data) {
-                    console.log(11, data)
                 }
-            })
-
-            console.log(lat, lng)
+            }, 'json', function (data) {
+                console.log(data)
+            });
         });
+
+        //
+        $('#panel_add_point .field.tags .value input[type="text"]').on('keydown', function (e) {
+            if (e.keyCode == 13) {
+                var name = $(this).val();
+
+                if (!name) return;
+
+                var html = tpl('tpl-tag-item')({
+                    'name': name
+                });
+
+                $('#panel_add_point .field.tags .list').append(html);
+
+                $(this).val('');
+            }
+        })
     },
 
     update: function () {
@@ -201,5 +211,13 @@ var app = {
                 $('#results').append(tpl('tpl-result-item')());
             }
         }, 2000);
+    },
+
+    tags: {
+        remove: function (el) {
+            $(el).closest('.item').fadeOut('fast', function () {
+                $(this).remove();
+            })
+        }
     }
 };

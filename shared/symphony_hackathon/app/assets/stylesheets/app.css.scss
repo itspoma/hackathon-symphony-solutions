@@ -74,7 +74,8 @@ html, body {
                 width: 250px;
 
                 input[type="text"],
-                textarea {
+                textarea,
+                select {
                     padding: 5px;
                     border: 1px #FFF solid;
                     width: 220px;
@@ -89,6 +90,11 @@ html, body {
                         background: #FFC5C5;
                         border-color: #FFA8A8;
                     }
+                }
+
+                select {
+                    height: 30px;
+                    width: auto;
                 }
 
                 textarea {
@@ -107,8 +113,15 @@ html, body {
                             margin-bottom: 5px;
                             padding: 3px 5px;
                             border-radius: 2px;
+                            cursor: pointer;
 
-                            span {
+                            @include transition(background-color, 0.2s, ease);
+
+                            &:hover {
+                                background-color: #494949;
+                            }
+
+                            span.close {
                                 background-color: #0F0F0F;
                                 margin-left: 5px;
                                 padding: 0px 5px;
