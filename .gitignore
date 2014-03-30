@@ -1,1 +1,4 @@
 .vagrant/
+
+shared/symphony_hackathon/db
+shared/symphony_hackathon/Gemfile.lock

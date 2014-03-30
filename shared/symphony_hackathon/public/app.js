@@ -83,6 +83,17 @@ var app = {
             $('#panel_search').fadeOut('fast');
             $('#panel_add_point').fadeIn('fast');
 
+            $.ajax({
+                url: '/api/v1/categories.json',
+                dateType: 'json',
+                success: function (data) {
+                    $('#panel_add_point .field.categories select').append('<option value="">- не вибрано -</option>');
+                    _.each(data, function (item) {
+                        $('#panel_add_point .field.categories select').append('<option value="'+item.id+'">'+item.name+'</option>');
+                    })
+                }
+            })
+
             if (!app.drag_marker) {
                 app.drag_marker = new google.maps.Marker({
                     position: new google.maps.LatLng(app.map.getCenter().lat(), app.map.getCenter().lng()),
@@ -148,6 +159,8 @@ var app = {
                 return invalidField(desctiptionEl);
             }
 
+            var category_id = $('#panel_add_point .field.categories select').val();
+
             var lat = $('#panel_add_point [name="lat"]').val()
               , lng = $('#panel_add_point [name="lng"]').val();
 
@@ -163,6 +176,7 @@ var app = {
                     'title': title,
                     'lng': lng,
                     'lat': lat,
+                    'category_id': category_id,
                     'actual_to': '',
                     'actual_from': '',
                     'tags': tags.join(', '),
@@ -200,6 +214,20 @@ var app = {
         $('#results .item').remove();
         $('#results-title span').html('&hellip;');
         $('#results-counts span').html('&hellip;');
+
+        $('#filter-tags .item').remove();
+        $.ajax({
+            url: '/api/v1/categories.json',
+            dateType: 'json',
+            success: function (data) {
+                _.each(data, function (item) {
+                    $('#filter-tags').append(tpl('tpl-filter-tag-item')({
+                        'title': item.name,
+                        'count': 1
+                    }));
+                })
+            }
+        })
 
         //
         setTimeout(function (){
