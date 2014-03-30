@@ -30,7 +30,6 @@ describe TasksController do
       }
     }
     post :create, params
-    puts Task.all.inspect
   end
 
 end

@@ -3,8 +3,8 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :title
       t.text :description
-      t.float :ltd
-      t.float :lng
+      t.string :ltd
+      t.string :lng
       t.date :actual_to
 
       t.timestamps
